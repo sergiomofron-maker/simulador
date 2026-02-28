@@ -31,14 +31,14 @@ function signToken(claims: JwtClaims): string {
 
 export async function register(email: string, password: string): Promise<AuthResult> {
   const normalizedEmail = email.toLowerCase();
-  const existingUser = findUserByEmail(normalizedEmail);
+  const existingUser = await findUserByEmail(normalizedEmail);
 
   if (existingUser) {
     throw new Error('EMAIL_ALREADY_IN_USE');
   }
 
   const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
-  const user = createUser({ email: normalizedEmail, passwordHash });
+  const user = await createUser({ email: normalizedEmail, passwordHash });
 
   return {
     token: signToken({ sub: user.id, email: user.email })
@@ -47,7 +47,7 @@ export async function register(email: string, password: string): Promise<AuthRes
 
 export async function login(email: string, password: string): Promise<AuthResult> {
   const normalizedEmail = email.toLowerCase();
-  const user = findUserByEmail(normalizedEmail);
+  const user = await findUserByEmail(normalizedEmail);
 
   if (!user) {
     throw new Error('INVALID_CREDENTIALS');

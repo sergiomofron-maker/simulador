@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["node"],
+    "paths": {
+      "@simulador/shared": ["../shared/src/index.ts"]
+    }
+  },
+  "references": [{ "path": "../shared" }],
+  "include": ["src/**/*.ts"]
+}

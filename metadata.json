@@ -1,0 +1,5 @@
+{
+  "name": "Three-Phase Electrical Simulator",
+  "description": "A technical engineering web simulator for modeling simplified balanced three-phase electrical power systems.",
+  "requestFramePermissions": []
+}
